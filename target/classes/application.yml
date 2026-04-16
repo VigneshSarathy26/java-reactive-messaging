@@ -21,6 +21,11 @@ spring:
     local-datacenter: datacenter1
     keyspace-name: ecommerce
     schema-action: create_if_not_exists
+    connection:
+      connect-timeout: 10s
+      init-query-timeout: 10s
+    request:
+      timeout: 10s
 
   data:
     redis:
@@ -29,3 +34,21 @@ spring:
 
   main:
     web-application-type: reactive
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus, metrics
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
